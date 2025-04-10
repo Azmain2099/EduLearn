@@ -3,13 +3,19 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-CSRF_TRUSTED_ORIGIN=["web-production-8c5b.up.railway.app"]
+
+# CSRF trusted origins
+CSRF_TRUSTED_ORIGINS = [
+    'https://web-production-8c5b.up.railway.app',  # Railway domain
+]
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-o_zp2*2($@15cimn-_(-z&0nf21e=6%uje&c^ui102ro4tabpc')  # Use env variable for secret key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+# Allowed Hosts
 ALLOWED_HOSTS = ['web-production-8c5b.up.railway.app', 'localhost', '127.0.0.1']
 
 # Application definition
@@ -54,8 +60,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'EduLearn.wsgi.application'
 
-# Database
-# Use SQLite for development or smaller-scale projects
+# Database configuration (SQLite for local development)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -63,7 +68,7 @@ DATABASES = {
     }
 }
 
-# Password validation
+# Password validation settings
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -79,13 +84,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
+# Localization
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
@@ -98,7 +101,7 @@ STATICFILES_DIRS = [
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Authentication Redirects
+# Authentication redirect URLs
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'  
 LOGIN_URL = '/login/'
@@ -107,7 +110,7 @@ LOGIN_URL = '/login/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'noreply@edulearn.com'
 
-# Password Reset Settings (For production, configure SMTP)
+# Email configuration for production (using SMTP)
 EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.example.com')  # Set SMTP host via environment variable
 EMAIL_PORT = 587  # or 465 for SSL
 EMAIL_USE_TLS = True  # Set to False for SMTP without TLS
@@ -115,7 +118,7 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'your-email@example.com')  # Your
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'your-email-password')  # Your email password
 DEFAULT_FROM_EMAIL = 'noreply@edulearn.com'  # Default sender email
 
-# Logging
+# Logging configuration
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -133,3 +136,9 @@ LOGGING = {
         },
     },
 }
+
+# CSRF and session settings for production
+CSRF_COOKIE_SECURE = True  # Ensures CSRF cookie is only sent over HTTPS
+CSRF_COOKIE_SAMESITE = 'None'  # For cross-site cookies in production
+SESSION_COOKIE_SAMESITE = 'None'  # For cross-site cookies in production
+
