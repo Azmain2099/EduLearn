@@ -3,7 +3,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+CSRF_TRUSTED_ORIGIN=["web-production-8c5b.up.railway.app"]
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-o_zp2*2($@15cimn-_(-z&0nf21e=6%uje&c^ui102ro4tabpc')  # Use env variable for secret key
 
